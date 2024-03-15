@@ -1,0 +1,21 @@
+<p style="color: green"><%= notice %></p>
+
+<div>
+  <p>
+    <strong>Creator:</strong>
+    <%= @creator.email %>
+  </p>
+
+  <% @creator.events.each do |event| %>
+    <%= render event %>
+    <p>
+      <%= link_to "Show this event", event %>
+    </p>
+  <% end %>
+
+</div>
+
+
+<div>
+  <%= link_to "Back to events", events_path %>
+</div>

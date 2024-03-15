@@ -2,6 +2,19 @@
 
 <%= render @event %>
 
+<p>
+  <strong>Attendants:</strong>
+  <% if @event.attendees.any? %>
+    <% @event.attendees.each_with_index do |attende, idx| %>
+      <p>
+        <%= idx + 1 %>. <%= attende.email %>
+      </p>
+    <% end %>
+  <% else %>
+    <p>No one has subscribed yet.</p>
+  <% end %>
+</p>
+
 <div>
   <%= link_to "Edit this event", edit_event_path(@event) %> |
   <%= link_to "Back to events", events_path %>
