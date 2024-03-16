@@ -16,7 +16,12 @@
 </p>
 
 <div>
-  <%= link_to "Edit this event", edit_event_path(@event) %> |
+  <% if user_signed_in? && current_user.id != @event.creator_id && !@event.attendee_ids.include?(current_user.id) %>
+  <p>
+    <%= link_to "Attend this event?", new_event_event_attendance_path(@event.id) %>
+  </p>
+  <% end %>
+  <%= link_to "Edit this event", edit_event_path(@event.id) %> |
   <%= link_to "Back to events", events_path %>
 
   <%= button_to "Destroy this event", @event, method: :delete %>

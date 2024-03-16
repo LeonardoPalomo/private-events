@@ -2,15 +2,31 @@
 
 <div>
   <p>
-    <strong>Creator:</strong>
+    <strong>User:</strong>
     <%= @creator.email %>
+    <p>----------------------------------------</p>
   </p>
 
-  <% @creator.events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "Show this event", event %>
-    </p>
+  <% if @creator.events.any? %>
+    <strong>Created events:</strong>
+    <% @creator.events.each do |event| %>
+      <%= render event %>
+      <p>
+        <%= link_to "Show this event", event %>
+      </p>
+    <% end %>
+  <p>----------------------------------------</p>
+  <% end %>
+
+  <% if @creator.attended_events.any? %>
+    <strong>Attended events:</strong>
+    <% @creator.attended_events.each do |event| %>
+      <%= render event %>
+      <p>
+        <%= link_to "Show this event", event %>
+      </p>
+    <% end %>
+  <p>----------------------------------------</p>
   <% end %>
 
 </div>
