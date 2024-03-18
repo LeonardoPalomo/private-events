@@ -3,11 +3,22 @@
 <h1>Events</h1>
 
 <div id="events">
-  <% @events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "Show this event", event %>
-    </p>
+  <% @events.upcoming_event.each do |event| %>
+    <% if event.event_date > Date.today %>
+      <%= render event %>
+      <p>
+        <%= link_to "Show this event", event %>
+      </p>
+    <% end %>
+  <% end %>
+  <p>---------------------------------------------</p>
+  <p><strong>EXPIRED EVENTS</strong></p>
+  <p>-------------------------------------------</p>
+  <% @events.order(event_date: :desc).each do |event| %>
+    <% if event.event_date < Date.today %>
+      <%= render event %>
+    <p>--------------------</p>
+    <% end %>
   <% end %>
 </div>
 

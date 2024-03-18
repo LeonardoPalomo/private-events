@@ -8,17 +8,11 @@ class EventAttendancesController < ApplicationController
   end
 
   def create
-    # p "---------------------"
-    # p @event
-    # p "---------------------"
+
     @event = Event.find(params[:event_id])
     @event_attendance = EventAttendance.new
     @event_attendance.attended_event = @event
     @event_attendance.event_attendee = current_user
-    # p "-------------IS THIS VALID?----------------"
-    # p @event_attendance
-    # p @event_attendance.valid?
-    # p "-------------------------------------------"
 
     if @event_attendance.save
       redirect_to event_url(@event), notice: "Subscription added."

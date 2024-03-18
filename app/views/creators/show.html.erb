@@ -9,7 +9,7 @@
 
   <% if @creator.events.any? %>
     <strong>Created events:</strong>
-    <% @creator.events.each do |event| %>
+    <% @creator.events.order(:event_date).each do |event| %>
       <%= render event %>
       <p>
         <%= link_to "Show this event", event %>
@@ -19,8 +19,16 @@
   <% end %>
 
   <% if @creator.attended_events.any? %>
+    <strong>Upcoming events:</strong>
+    <% @creator.attended_events.upcoming_event.each do |event| %>
+      <%= render event %>
+      <p>
+        <%= link_to "Show this event", event %>
+      </p>
+    <% end %>
+    <p>----------------------------------------</p>
     <strong>Attended events:</strong>
-    <% @creator.attended_events.each do |event| %>
+    <% @creator.attended_events.upcoming_event.invert_where.each do |event| %>
       <%= render event %>
       <p>
         <%= link_to "Show this event", event %>
